@@ -1,0 +1,18 @@
+extends Node2D
+
+@onready var scale_component: ScaleComponent = $ScaleComponent as ScaleComponent
+@onready var move_component: MoveComponent = $MoveComponent as MoveComponent
+@onready var stats_component: StatsComponent = $StatsComponent as StatsComponent
+@onready var shake_component: ShakeComponent = $ShakeComponent as ShakeComponent
+@onready var hitbox_component:HitboxComponent = $HitboxComponent as HitboxComponent
+@onready var hurtbox_component:HurtboxComponent = $HurtboxComponent as HurtboxComponent
+@onready var visible_on_screen_notifier_2d = $VisibleOnScreenNotifier2D
+
+
+func _ready() -> void:
+	visible_on_screen_notifier_2d.screen_exited.connect(queue_free)
+	hurtbox_component.hurt.connect(func(hithox: HitboxComponent):
+		scale_component.tween_scale()
+		shake_component.tween_shake()
+	)
+	StatsComponent.no_health 

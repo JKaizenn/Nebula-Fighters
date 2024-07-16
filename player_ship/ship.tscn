@@ -1,0 +1,97 @@
+[gd_scene load_steps=16 format=3 uid="uid://cec63gfiy7fkc"]
+
+[ext_resource type="Texture2D" uid="uid://6cal2pmqctpi" path="res://Assets/Sprites/Space Ship.png" id="1_f4300"]
+[ext_resource type="Script" path="res://player_ship/ship.gd" id="1_ms5bb"]
+[ext_resource type="Script" path="res://Scripts/Components/move_component.gd" id="2_34n6v"]
+[ext_resource type="Script" path="res://Scripts/Components/spawner_component.gd" id="2_q4mdq"]
+[ext_resource type="Script" path="res://Scripts/Components/move_input_component.gd" id="3_kgub3"]
+[ext_resource type="PackedScene" uid="uid://pj2eomx56h71" path="res://Assets/Projectiles/laser.tscn" id="3_mbikc"]
+[ext_resource type="Resource" uid="uid://ca3kf2lse8s80" path="res://player_ship/ship_move_stats.tres" id="4_htyc0"]
+[ext_resource type="Script" path="res://Scripts/Components/position_clamp_component.gd" id="5_pi1dh"]
+[ext_resource type="Script" path="res://Scripts/Components/scale_component.gd" id="9_7fsy3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4qc4"]
+atlas = ExtResource("1_f4300")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_813o2"]
+atlas = ExtResource("1_f4300")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgywp"]
+atlas = ExtResource("1_f4300")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3i3e4"]
+atlas = ExtResource("1_f4300")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vy0nq"]
+atlas = ExtResource("1_f4300")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sjg7k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4qc4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_813o2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgywp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3i3e4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vy0nq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Ship" type="Node2D"]
+script = ExtResource("1_ms5bb")
+
+[node name="SpawnerComponent" type="Node2D" parent="."]
+position = Vector2(320, 420)
+script = ExtResource("2_q4mdq")
+scene = ExtResource("3_mbikc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(320, 420)
+sprite_frames = SubResource("SpriteFrames_sjg7k")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.45727
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("2_34n6v")
+actor = NodePath("..")
+
+[node name="MoveInputComponent" type="Node" parent="." node_paths=PackedStringArray("move_component")]
+script = ExtResource("3_kgub3")
+move_component = NodePath("../MoveComponent")
+move_stats = ExtResource("4_htyc0")
+
+[node name="PositionClampComponent" type="Node2D" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("5_pi1dh")
+actor = NodePath("..")
+
+[node name="LeftCannon" type="Marker2D" parent="."]
+position = Vector2(313, 418)
+
+[node name="RightCannon" type="Marker2D" parent="."]
+position = Vector2(327, 418)
+
+[node name="FireRateTimer" type="Timer" parent="."]
+wait_time = 0.4
+autostart = true
+
+[node name="ScaleComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("9_7fsy3")
+sprite = NodePath("../AnimatedSprite2D")
