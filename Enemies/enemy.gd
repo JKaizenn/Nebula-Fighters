@@ -1,12 +1,13 @@
 extends Node2D
-
-@onready var scale_component: ScaleComponent = $ScaleComponent as ScaleComponent
-@onready var move_component: MoveComponent = $MoveComponent as MoveComponent
-@onready var stats_component: StatsComponent = $StatsComponent as StatsComponent
-@onready var shake_component: ShakeComponent = $ShakeComponent as ShakeComponent
-@onready var hitbox_component:HitboxComponent = $HitboxComponent as HitboxComponent
-@onready var hurtbox_component:HurtboxComponent = $HurtboxComponent as HurtboxComponent
+@onready var stats_component = $StatsComponent as StatsComponent
+@onready var hurt_component = $HurtComponent as HurtComponent
+@onready var scale_component = $ScaleComponent as ScaleComponent
+@onready var move_component = $MoveComponent as MoveComponent
+@onready var shake_component  = $ShakeComponent as ShakeComponent
+@onready var hitbox_component = $HitboxComponent as HitboxComponent
+@onready var hurtbox_component = $HurtboxComponent as HurtboxComponent
 @onready var visible_on_screen_notifier_2d = $VisibleOnScreenNotifier2D
+@onready var destroyed_component = $DestroyedComponent as DestroyedComponent
 
 
 func _ready() -> void:
@@ -15,4 +16,6 @@ func _ready() -> void:
 		scale_component.tween_scale()
 		shake_component.tween_shake()
 	)
-	StatsComponent.no_health 
+	stats_component.no_health.connect(queue_free)
+	hitbox_component.hit_hurtbox.connect(destroyed_component.destroy.unbind(1))
+	
