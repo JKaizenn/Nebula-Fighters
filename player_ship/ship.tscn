@@ -66,29 +66,30 @@ collision_mask = 0
 script = ExtResource("2_v2rio")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HurtboxComponent"]
-polygon = PackedVector2Array(320, 393, 325, 403, 333, 416, 340, 425, 340, 451, 330, 452, 311, 452, 300, 449, 301, 425, 307, 416)
+position = Vector2(-322, -431)
+polygon = PackedVector2Array(320, 392, 325, 403, 333, 416, 340, 425, 340, 451, 330, 452, 311, 452, 300, 451, 300, 425, 307, 416)
 
 [node name="SpawnerComponent" type="Node2D" parent="."]
-position = Vector2(320, 420)
+position = Vector2(-3, 2)
 script = ExtResource("2_q4mdq")
 scene = ExtResource("3_mbikc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(320, 420)
+position = Vector2(-2, -11)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_sjg7k")
 animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.45727
 
-[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+[node name="Move" type="Node" parent="." node_paths=PackedStringArray("actor")]
 script = ExtResource("2_34n6v")
 actor = NodePath("..")
 
-[node name="MoveInputComponent" type="Node" parent="." node_paths=PackedStringArray("move_component")]
+[node name="MoveInput" type="Node" parent="." node_paths=PackedStringArray("move_component")]
 script = ExtResource("3_kgub3")
-move_component = NodePath("../MoveComponent")
+move_component = NodePath("../Move")
 move_stats = ExtResource("4_htyc0")
 
 [node name="PositionClampComponent" type="Node2D" parent="." node_paths=PackedStringArray("actor")]
@@ -96,10 +97,10 @@ script = ExtResource("5_pi1dh")
 actor = NodePath("..")
 
 [node name="LeftCannon" type="Marker2D" parent="."]
-position = Vector2(313, 418)
+position = Vector2(-15, -15)
 
 [node name="RightCannon" type="Marker2D" parent="."]
-position = Vector2(327, 418)
+position = Vector2(11, -15)
 
 [node name="FireRateTimer" type="Timer" parent="."]
 wait_time = 0.4
@@ -118,6 +119,7 @@ stats_component = NodePath("../StatsComponent")
 hurtbox_component = NodePath("../HurtboxComponent")
 
 [node name="Explosion" type="Node2D" parent="."]
+position = Vector2(0, -2)
 script = ExtResource("2_q4mdq")
 scene = ExtResource("13_smiwd")
 

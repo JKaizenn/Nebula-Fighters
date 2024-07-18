@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b8kpcv38c7wu6"]
+[gd_scene load_steps=17 format=3 uid="uid://b8kpcv38c7wu6"]
 
 [ext_resource type="Script" path="res://Scripts/Components/scale_component.gd" id="1_jlpt0"]
 [ext_resource type="Script" path="res://Enemies/enemy.gd" id="1_pjhn4"]
@@ -12,6 +12,8 @@
 [ext_resource type="Script" path="res://Scripts/Components/spawner_component.gd" id="10_xlmrg"]
 [ext_resource type="PackedScene" uid="uid://bc7ohfyf5a20w" path="res://Assets/Effects/explosion_effect.tscn" id="11_o6pct"]
 [ext_resource type="Script" path="res://Scripts/Components/destroyed_component.gd" id="12_xom0e"]
+[ext_resource type="Script" path="res://Scripts/Components/score_component.gd" id="13_gdr5d"]
+[ext_resource type="Resource" uid="uid://xhr8bdpwtut5" path="res://Menus/game_stats.tres" id="14_dm61q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mjb04"]
 radius = 9.0
@@ -40,7 +42,7 @@ sprite = NodePath("../Sprite2D")
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
 script = ExtResource("2_s5uaw")
 actor = NodePath("..")
-velocity = Vector2(2.08165e-12, 50)
+velocity = Vector2(2.08165e-12, 200)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -76,3 +78,7 @@ script = ExtResource("12_xom0e")
 actor = NodePath("..")
 stats_component = NodePath("../StatsComponent")
 destroy_effect_spawner_component = NodePath("../SpawnerComponent")
+
+[node name="ScoreComponent" type="Node" parent="."]
+script = ExtResource("13_gdr5d")
+game_stats = ExtResource("14_dm61q")
