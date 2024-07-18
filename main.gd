@@ -11,8 +11,9 @@ func _ready() -> void:
 	
 	ship.tree_exiting.connect(func():
 		await get_tree().create_timer(1,0).timeout
-		get_tree().change_scene_to_file("res://Menus/game_over.tscn")
+		get_tree().change_scene_to_file("res://Scenes/game_over.tscn")
 		)
 		
 func update_score_label(new_score: int) -> void:
 		score_label.text ="Score " + str(new_score)
+		

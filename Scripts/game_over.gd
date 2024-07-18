@@ -4,4 +4,4 @@ extends Control
 func _process(delta):
 	pass
 	if Input.is_action_just_pressed("ui_accept"):
-		get_tree().change_scene_to_file("res://Menus/menu.tscn")
+		get_tree().change_scene_to_file("res://Scenes/menu.tscn")

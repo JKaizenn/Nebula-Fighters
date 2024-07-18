@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://coixsq46imwxl"]
 
-[ext_resource type="Script" path="res://Assets/Effects/space_background.gd" id="1_byncy"]
+[ext_resource type="Script" path="res://Scripts/space_background.gd" id="1_byncy"]
 [ext_resource type="Texture2D" uid="uid://dgixgnb5f5fco" path="res://Assets/Sprites/Space.png" id="2_i76ew"]
 [ext_resource type="Texture2D" uid="uid://bcg8xm18sy1pb" path="res://Assets/Sprites/Far Stars.png" id="3_s3j4g"]
 [ext_resource type="Texture2D" uid="uid://d5bdjbho4vfn" path="res://Assets/Sprites/Near Stars.png" id="4_m7iny"]
